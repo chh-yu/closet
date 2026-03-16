@@ -1,0 +1,20 @@
+name: keepalive
+
+on:
+  schedule:
+    - cron: "0 0 1 * *"   # 每月 1 号运行一次
+  workflow_dispatch:
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Commit keepalive
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git commit --allow-empty -m "keepalive"
+          git push
